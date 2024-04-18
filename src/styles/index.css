@@ -1,0 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Jersey+10&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  width: 100vw;
+  /* height: 100vh; */
+}
+
+main {
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+header nav {
+  background: linear-gradient(90deg, #00f6ff 0%, #073abb 100%);
+}
+
+header nav a {
+  font-family: "Jersey 10", sans-serif;
+  border-radius: 10px;
+  font-size: 46px;
+  color: #d5def5;
+  transition: transform 0.3s ease-in-out;
+}
+
+header nav a:hover {
+  transform: translateY(-10px);
+  text-decoration: underline;
+}
+
+header nav a.active {
+  color: white;
+  text-decoration: underline;
+}
