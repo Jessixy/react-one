@@ -15,6 +15,8 @@ const DisplayAccordion = () => {
         }}
       >
         <Accordion>Beliebige Child Component</Accordion>
+        <Accordion size="large">Beliebige Child Component</Accordion>
+        <Accordion size="middle">Beliebige Child Component</Accordion>
       </AccordionContext.Provider>
     </>
   );
