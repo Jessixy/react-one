@@ -1,20 +1,22 @@
+import { MdSubdirectoryArrowLeft } from "react-icons/md";
 import {
   AccordionContext,
   useAccordionContext,
 } from "../../../context/accordion-context";
 import { BiCollapseVertical } from "react-icons/bi";
-import { MdSubdirectoryArrowLeft } from "react-icons/md";
 import { VariantProps, cva } from "class-variance-authority";
-import { useToggle } from "../../../hooks/useToggle";
+import { HTMLAttributes } from "react";
 import { cn } from "../../../libs/utils";
+import { useToggle } from "../../../hooks/useToggle";
 
-type AccordionProps = VariantProps<typeof accordionContainerVariants> &
-  React.ComponentProps<"div"> & {
-    className?: string;
-    variant?: string;
-    size?: string;
-    children?: React.ReactNode;
-  };
+interface AccordionProps
+  extends HTMLAttributes<React.JSX.Element>,
+    VariantProps<typeof AccordionItem> {
+  children?: React.ReactNode;
+  variant?: string;
+  size?: string;
+}
+//
 
 export type AccordionIconProps = {
   openIcon: React.ReactNode;
@@ -28,52 +30,56 @@ export type AccordionContextType = {
   toggleOpen: () => void;
 };
 
-export const Accordion = ({
-  className,
-  children,
-  variant,
-  size,
-  ...props
-}: AccordionProps): JSX.Element => {
+export const Accordion = ({ children }: AccordionProps) => {
   const { status: open, toggleStatus: toggleOpen } = useToggle();
+
   return (
-    <AccordionContext.Provider
-      value={{
-        title: "Accordion Title",
-        contentText: "Accordion Content",
-        open: open,
-        toggleOpen: toggleOpen,
-      }}
-    >
-      <div
-        {...props}
-        className={cn(
-          accordionContainerVariants({
-            className,
-            variant,
-            size,
-            ...props,
-          })
-        )}
+    <>
+      <AccordionContext.Provider
+        value={{
+          title: "Accordion Title",
+          contentText: "Accordion Content",
+          open: open,
+          toggleOpen: toggleOpen,
+        }}
       >
-        <AccordionItem key={1}>{children}</AccordionItem>
-      </div>
-    </AccordionContext.Provider>
+        <AccordionItem>{children}</AccordionItem>
+      </AccordionContext.Provider>
+    </>
   );
 };
 
-export const AccordionItem = ({ children }: AccordionProps): JSX.Element => {
+export const AccordionItem = ({
+  children,
+  className,
+  variant,
+  size,
+  ...props
+}: AccordionProps) => {
   const { open } = useAccordionContext();
   return (
-    <div className="flex flex-col gap-3 rounded-lg">
-      <AccordionHeader></AccordionHeader>
-      {open && <AccordionContent>{children}</AccordionContent>}
+    <div
+      {...props}
+      className={cn(
+        accordionContainerVariants({
+          children,
+          className,
+          variant,
+          size,
+          ...props,
+        })
+      )}
+    >
+      <div className="flex flex-col gap-3 rounded-lg">
+        <AccordionHeader></AccordionHeader>
+        {open && <AccordionContent>{children}</AccordionContent>}
+      </div>
     </div>
   );
 };
 
 // Header
-export const AccordionHeader = (): JSX.Element => {
+export const AccordionHeader = () => {
   const { title, toggleOpen } = useAccordionContext();
 
   return (
@@ -85,7 +91,7 @@ export const AccordionHeader = (): JSX.Element => {
           <AccordionIcon
             closeIcon={<MdSubdirectoryArrowLeft />}
             openIcon={<BiCollapseVertical />}
-          ></AccordionIcon>
+          />
         </button>
       </div>
     </div>
@@ -93,17 +99,16 @@ export const AccordionHeader = (): JSX.Element => {
 };
 
 // Icon
-// Icon
 export const AccordionIcon = ({ openIcon, closeIcon }: AccordionIconProps) => {
   const { open } = useAccordionContext();
   return <span>{open ? openIcon : closeIcon}</span>;
 };
 
 // Content
-export const AccordionContent = ({ children }: AccordionProps): JSX.Element => {
+export const AccordionContent = ({ children }: AccordionProps) => {
   const { contentText } = useAccordionContext();
   return (
-    <div className="border border-b border-gray-300 rounded-lg">
+    <div className="border border-b border-gray-300 rounded-lg ">
       <div className="flex flex-grow flex-col gap-2 px-7 p-4 ">
         <p>{contentText}</p>
         <div>{children}</div>
@@ -112,7 +117,7 @@ export const AccordionContent = ({ children }: AccordionProps): JSX.Element => {
   );
 };
 
-// Custom Styles -------------------------------------------------------------------
+// Custom Styles
 const accordionContainerVariants = cva(``, {
   variants: {
     variant: {
