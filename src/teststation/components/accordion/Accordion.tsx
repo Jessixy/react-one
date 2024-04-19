@@ -1,22 +1,55 @@
 import { MdSubdirectoryArrowLeft } from "react-icons/md";
-import { useAccordionContext } from "../../../context/accordion-context";
+import {
+  AccordionContext,
+  useAccordionContext,
+} from "../../../context/accordion-context";
 import { BiCollapseVertical } from "react-icons/bi";
-import { cva } from "class-variance-authority";
+import { VariantProps, cva } from "class-variance-authority";
 import { HTMLAttributes } from "react";
 import { cn } from "../../../libs/utils";
+import { useToggle } from "../../../hooks/useToggle";
 
-interface AccordionProps extends HTMLAttributes<HTMLDivElement> {
+interface AccordionProps
+  extends HTMLAttributes<React.JSX.Element>,
+    VariantProps<typeof AccordionItem> {
   children?: React.ReactNode;
   variant?: string;
   size?: string;
 }
+//
 
 export type AccordionIconProps = {
   openIcon: React.ReactNode;
   closeIcon: React.ReactNode;
 };
 
-const Accordion = ({
+export type AccordionContextType = {
+  title: string;
+  contentText: string;
+  open: boolean;
+  toggleOpen: () => void;
+};
+
+export const Accordion = ({ children }: AccordionProps) => {
+  const { status: open, toggleStatus: toggleOpen } = useToggle();
+
+  return (
+    <>
+      <AccordionContext.Provider
+        value={{
+          title: "Accordion Title",
+          contentText: "Accordion Content",
+          open: open,
+          toggleOpen: toggleOpen,
+        }}
+      >
+        <AccordionItem>{children}</AccordionItem>
+      </AccordionContext.Provider>
+    </>
+  );
+};
+
+export const AccordionItem = ({
   children,
   className,
   variant,
@@ -24,7 +57,6 @@ const Accordion = ({
   ...props
 }: AccordionProps) => {
   const { open } = useAccordionContext();
-
   return (
     <div
       {...props}
@@ -45,8 +77,6 @@ const Accordion = ({
     </div>
   );
 };
-
-export default Accordion;
 
 // Header
 export const AccordionHeader = () => {

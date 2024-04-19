@@ -1,11 +1,5 @@
 import { createContext, useContext } from "react";
-
-type AccordionContextType = {
-  title: string;
-  contentText: string;
-  open: boolean;
-  toggleOpen: () => void;
-};
+import { AccordionContextType } from "../teststation/components/accordion/Accordion";
 
 export const AccordionContext = createContext<AccordionContextType>(
   {} as AccordionContextType
