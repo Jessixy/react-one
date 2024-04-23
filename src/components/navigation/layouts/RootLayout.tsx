@@ -5,10 +5,13 @@ const RootLayout = () => {
   return (
     <div>
       <header>
-        <nav className="flex flex-row p-6 justify-end gap-8 bg-slate-400">
+        <nav className="flex flex-row p-6 px-10 justify-end gap-8 bg-slate-400">
           <NavLink to="/">Home</NavLink>
-          <NavLink to="/about">About</NavLink>
+          <NavLink to="/test">Test</NavLink>
+          <NavLink to="/various">Miscellaneous</NavLink>
           <NavLink to="/accordion">Accordion</NavLink>
+          <NavLink to="/modalone">Modal-One</NavLink>
+          <NavLink to="/portal">Portal</NavLink>
           <NavLink to="/help">Help</NavLink>
         </nav>
       </header>

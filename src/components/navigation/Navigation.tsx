@@ -15,12 +15,20 @@ import NotFound from "../pages/help/NotFound";
 
 import DisplayAccordion from "../pages/DisplayAccordion";
 
+import DisplayModalOne from "../pages/DisplayModalOne";
+import DisplayPortal from "../pages/DisplayPortal";
+import Miscellaneous from "../pages/Miscellaneous";
+import TestComponents from "../pages/TestComponents";
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} />
+      <Route path="test" element={<TestComponents />} />
       <Route path="accordion" element={<DisplayAccordion />} />
-      <Route path="about" element={<About />} />
+      <Route path="modalone" element={<DisplayModalOne />} />
+      <Route path="portal" element={<DisplayPortal />} />
+      <Route path="various" element={<Miscellaneous />} />
       <Route path="help" element={<HelpLayout />}>
         <Route path="faq" element={<Faq />} />
         <Route path="contact" element={<Contact />} />

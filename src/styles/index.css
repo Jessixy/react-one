@@ -43,7 +43,7 @@ header nav {
 header nav a {
   font-family: "Jersey 10", sans-serif;
   border-radius: 10px;
-  font-size: 46px;
+  font-size: 26px;
   color: #d5def5;
   transition: transform 0.3s ease-in-out;
 }

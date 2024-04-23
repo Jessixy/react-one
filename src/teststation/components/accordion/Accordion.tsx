@@ -62,6 +62,7 @@ export const Accordion = ({
   );
 };
 
+// Icon
 export const AccordionItem = ({ children }: AccordionProps): JSX.Element => {
   const { open } = useAccordionContext();
   return (
@@ -92,8 +93,6 @@ export const AccordionHeader = (): JSX.Element => {
   );
 };
 
-// Icon
-// Icon
 export const AccordionIcon = ({ openIcon, closeIcon }: AccordionIconProps) => {
   const { open } = useAccordionContext();
   return <span>{open ? openIcon : closeIcon}</span>;
