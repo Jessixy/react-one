@@ -8,7 +8,7 @@ type TableProps = {
   data: TableData[];
 };
 
-const Table = ({ data }: TableProps) => {
+export const Table = ({ data }: TableProps) => {
   const columns = Object.keys(data[0] || {});
   return (
     <div className="border border-neutral-400 rounded-md bg-slate-100 px-10 py-5">
@@ -27,7 +27,6 @@ const Table = ({ data }: TableProps) => {
               {columns.map((column, columnIndex) => (
                 <td key={`${rowIndex}-${columnIndex}`}>
                   {row[column]}
-                  <p className="text-red-300">{`${rowIndex}-${columnIndex} |`}</p>
                 </td>
               ))}
             </tr>
@@ -38,7 +37,7 @@ const Table = ({ data }: TableProps) => {
   );
 };
 
-export default Table;
+
 
 export const GridTable = ({ data }: TableProps) => {
   const columns = Object.keys(data[0] || {});

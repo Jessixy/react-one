@@ -4,27 +4,26 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import About from "../pages/About";
+//import About from "../pages/About";
 import Home from "../pages/Home";
 import RootLayout from "./layouts/RootLayout";
-
 import HelpLayout from "./layouts/HelpLayout";
 import Contact from "../pages/help/Contact";
 import Faq from "../pages/help/Faq";
 import NotFound from "../pages/help/NotFound";
-
 import DisplayAccordion from "../pages/DisplayAccordion";
-
 import DisplayModalOne from "../pages/DisplayModalOne";
 import DisplayPortal from "../pages/DisplayPortal";
 import Miscellaneous from "../pages/Miscellaneous";
 import TestComponents from "../pages/TestComponents";
+import { TestBE } from "../pages/TestBE";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} />
       <Route path="test" element={<TestComponents />} />
+      <Route path="test-be" element={<TestBE />} />
       <Route path="accordion" element={<DisplayAccordion />} />
       <Route path="modalone" element={<DisplayModalOne />} />
       <Route path="portal" element={<DisplayPortal />} />
