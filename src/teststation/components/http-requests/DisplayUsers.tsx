@@ -1,12 +1,18 @@
 
-import { useUsers } from "../../../hooks/http/http-users";
+import { useUserById, useUsers } from "../../../hooks/http/http-users";
 import { Table } from "../tables/Table";
 
 
 
 export const DisplayUsers = () => {
   const users = useUsers();
-    
+  useUserById(null)
+  console.log(users)
+ 
+
+  const hello = () => { 
+    console.log("Hello")
+   }
 
 
 
@@ -30,9 +36,12 @@ export const DisplayUsers = () => {
   return (
     <div>
         <ul>
-            {users.map((user: any) => (
-                <li key={user.user_id}>{user.firstname}{user.lastname}</li>
-            ))}
+        {users.map((user: any) => (
+            <li key={user.user_id} onClick={hello}>
+            {user.firstname}
+            {user.lastname}
+          </li>
+        ))}
         </ul>
         <br />
         <Table data={users} />
