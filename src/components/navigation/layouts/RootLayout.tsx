@@ -1,6 +1,5 @@
 import { NavLink, Outlet } from "react-router-dom";
 import Breadcrumbs from "../../breadcrumbs/Breadcrumbs";
-import { FeaturesLayout } from "./FeaturesLayout";
 
 const RootLayout = () => {
   return (
