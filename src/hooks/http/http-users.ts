@@ -1,8 +1,16 @@
 import { useState, useEffect } from "react";
-import { User } from "../../types_and_interfaces/TableTypes";
+
+export type User = {
+  user_id: number;
+  firstname: string;
+  lastname: string;
+  age: number;
+  email: string;
+  role: string;
+};
 
 export const useUsers = (): User[] => {
-  const [users, setUsers] = useState<User[]>([] as User[]);
+  const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
     const fetchUsers = async () => {

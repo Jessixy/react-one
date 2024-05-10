@@ -1,11 +1,10 @@
-import { useUsers } from "../../../hooks/http/http-users";
-import { User } from "../../../types_and_interfaces/TableTypes";
+import { User, useUsers } from "../../../hooks/http/http-users";
+import { GridTable } from "../tables/GridTable";
 
 import { Table } from "../tables/Table";
 
 export const DisplayUsers = () => {
   const users = useUsers();
-  console.log(users);
 
   return (
     <div>
@@ -19,9 +18,9 @@ export const DisplayUsers = () => {
         </ul>
       </div>
       <br />
-
-      <br />
       <Table data={users} />
+      <br />
+      <GridTable data={users} />
     </div>
   );
 };

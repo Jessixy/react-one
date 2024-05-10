@@ -1,30 +1,23 @@
-import React from "react";
-import { User } from "./Table";
-import { useUsers } from "../../../hooks/http/http-users";
+import { User } from "../../../hooks/http/http-users";
+import { TableProps } from "../../../types_and_interfaces/TableTypes";
 
-export const GridTable = () => {
-  const users: User[] = useUsers();
-  const columns = Object.keys(users[0] || {});
+export const GridTable = ({ data }: TableProps) => {
+  const columns = Object.keys(data[0] || {}).filter((key) => key !== "user_id");
 
-  console.log(Object.keys(users[0]));
   return (
-    <div className={`grid grid-cols-${columns.length} gap-4`}>
-      {/* Spaltenüberschriften */}
-      {columns.map((column) => (
-        <div key={column} className="font-bold">
-          {column}
-        </div>
-      ))}
-      {/* Datenzeilen */}
-      {users.map((row, rowIndex) => (
-        <React.Fragment key={rowIndex}>
-          {columns.map((column, columnIndex) => (
-            <div key={`${rowIndex}-${columnIndex}`} className="border p-2">
-              {row[column as keyof User]?.toString()}
-            </div>
-          ))}
-        </React.Fragment>
-      ))}
+    <div
+      className={`grid grid-cols-${columns.length} grid-rows-${data.length} gap-4`}
+    >
+      {columns.map((col) => {
+        return (
+          <div>
+            <div>{col.toUpperCase()}</div>
+            {data.map((row) => {
+              return <div>{row[col as keyof User]}</div>;
+            })}
+          </div>
+        );
+      })}
     </div>
   );
 };
