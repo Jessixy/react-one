@@ -13,3 +13,8 @@ export type TableRowProps = {
   columns: string[];
   rowIndex: number;
 };
+
+export type TableColumnProps = {
+  row: User;
+  column: string;
+};

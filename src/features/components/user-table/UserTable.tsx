@@ -1,5 +1,5 @@
 import { User } from "../../../hooks/http/http-users";
-import { Table } from "../../../teststation/components/tables/Table";
+
 import { TableProps } from "../../../types_and_interfaces/TableTypes";
 import {
   TableColumnProps,
@@ -39,29 +39,22 @@ export const UserTable = ({ data }: TableProps) => {
 
 export const TableRow = ({ row, columns, rowIndex }: TableRowProps) => {
   return (
-    <tr key={rowIndex} className="border-b border-gray-300">
+    <tr className="border-b border-gray-300" key={rowIndex}>
       {columns.map((column, columnIndex) => (
-        <td key={`${rowIndex}-${columnIndex}`} className="py-2 px-4 text-sm">
-          <div>
-            <p>{row[column as keyof User]?.toString()}</p>
-          </div>
+        <td className="py-2 px-4 text-sm" key={`${rowIndex}-${columnIndex}`}>
+          {row[column as keyof User]?.toString()}
         </td>
       ))}
     </tr>
   );
 };
 
-export const TableColumn = ({
-  row,
-  column,
-  columnIndex,
-  rowIndex,
-}: TableColumnProps) => {
-  return (
-    <td key={`${rowIndex}-${columnIndex}`} className="py-2 px-4 text-sm">
-      <div>
-        <p>{row[column as keyof User]?.toString()}</p>
-      </div>
-    </td>
-  );
-};
+// export const TableColumn = ({ row, column }: TableColumnProps) => {
+//   return (
+//     <td className="py-2 px-4 text-sm">
+//       <div>
+//         <p>{row[column as keyof User]?.toString()}</p>
+//       </div>
+//     </td>
+//   );
+// };
