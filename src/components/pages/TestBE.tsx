@@ -1,9 +1,9 @@
-import { DisplayUsers } from "../../teststation/components/http-requests/DisplayUsers";
+import { DynamicTable } from "../../teststation/components/tables/DynamicTable";
 
 export const TestBE = () => {
   return (
     <div>
-      <DisplayUsers />
+      <DynamicTable />
     </div>
   );
 };

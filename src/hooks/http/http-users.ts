@@ -29,29 +29,19 @@ export const useUsers = (): User[] => {
   return users;
 };
 
-export const useUserById = (id: number | string | null) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      setLoading(true);
-      if (id !== null) {
-        try {
-          const response = await fetch(`http://localhost:3000/users/${id}`);
-          const data = await response.json();
-          setUser(data);
-        } catch (error: any) {
-          setError(error);
-        } finally {
-          setLoading(false);
-        }
+export const useDeleteUser = (id: number | null) => {
+  const deleteUser = async (id: number) => {
+    try {
+      const response = await fetch(`http://localhost:3000/users/${id}`, {
+        method: "DELETE",
+      });
+      const data = await response.json();
+      console.log(data);
+      if (!response.ok) {
+        throw new Error("Failed to delete user");
       }
-    };
+    } catch (error) {}
+  };
 
-    fetchUser();
-  }, [id]);
-
-  return { user, loading, error };
+  return { deleteUser };
 };

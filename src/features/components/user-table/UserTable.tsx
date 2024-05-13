@@ -1,13 +1,19 @@
-import { User } from "../../../hooks/http/http-users";
+import { useMemo } from "react";
+import { User, useDeleteUser, useUsers } from "../../../hooks/http/http-users";
+import { TableRowProps } from "../../interfaces/UserTableTypes";
 
-import { TableProps } from "../../../types_and_interfaces/TableTypes";
-import {
-  TableColumnProps,
-  TableRowProps,
-} from "../../interfaces/UserTableTypes";
+export const UserTable = () => {
+  const data = useUsers();
+  const { deleteUser } = useDeleteUser(null);
 
-export const UserTable = ({ data }: TableProps) => {
-  const columns = Object.keys(data[0] || {}).filter((key) => key !== "user_id");
+  const columns = useMemo(() => {
+    return Object.keys(data[0] || {}).filter((key) => key !== "user_id");
+  }, [data]);
+
+  const handleDelete = (user: User) => {
+    console.log(`Lösche Benutzer mit ID ${user.user_id}`);
+    deleteUser(user.user_id);
+  };
 
   return (
     <div className="border border-neutral-400 rounded-md bg-slate-100 px-10 py-5">
@@ -29,6 +35,7 @@ export const UserTable = ({ data }: TableProps) => {
               row={row}
               columns={columns}
               rowIndex={rowIndex}
+              onDelete={handleDelete}
             />
           ))}
         </tbody>
@@ -39,22 +46,13 @@ export const UserTable = ({ data }: TableProps) => {
 
 export const TableRow = ({ row, columns, rowIndex }: TableRowProps) => {
   return (
-    <tr className="border-b border-gray-300" key={rowIndex}>
+    <tr className="border-b border-gray-300">
       {columns.map((column, columnIndex) => (
         <td className="py-2 px-4 text-sm" key={`${rowIndex}-${columnIndex}`}>
           {row[column as keyof User]?.toString()}
         </td>
       ))}
+      <td>{/* <button onClick={() => onDelete(row)}>Löschen</button> */}</td>
     </tr>
   );
 };
-
-// export const TableColumn = ({ row, column }: TableColumnProps) => {
-//   return (
-//     <td className="py-2 px-4 text-sm">
-//       <div>
-//         <p>{row[column as keyof User]?.toString()}</p>
-//       </div>
-//     </td>
-//   );
-// };
