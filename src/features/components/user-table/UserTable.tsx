@@ -1,18 +1,36 @@
-import { useMemo } from "react";
-import { User, useDeleteUser, useUsers } from "../../../hooks/http/http-users";
-import { TableRowProps } from "../../interfaces/UserTableTypes";
+import { useEffect, useMemo } from "react";
+import {
+  User,
+  useAddUser,
+  useDeleteUser,
+  useUsers,
+} from "../../../hooks/http/http-users";
+import { TableProps, TableRowProps } from "../../interfaces/UserTableTypes";
 
-export const UserTable = () => {
+export const UserTable = ({ user }: TableProps) => {
   const data = useUsers();
-  const { deleteUser } = useDeleteUser(null);
+  const { deleteUser } = useDeleteUser();
+  const { addUser } = useAddUser();
 
+  // don't render the id
   const columns = useMemo(() => {
     return Object.keys(data[0] || {}).filter((key) => key !== "user_id");
   }, [data]);
 
+  // Add
+  useEffect(() => {
+    if (user) {
+      console.log(user);
+      addUser(user);
+    }
+  }, [user]);
+
+  // Delete User
   const handleDelete = (user: User) => {
     console.log(`Lösche Benutzer mit ID ${user.user_id}`);
-    deleteUser(user.user_id);
+    if (user.user_id) {
+      deleteUser(user.user_id);
+    }
   };
 
   return (
@@ -44,7 +62,12 @@ export const UserTable = () => {
   );
 };
 
-export const TableRow = ({ row, columns, rowIndex }: TableRowProps) => {
+export const TableRow = ({
+  row,
+  columns,
+  rowIndex,
+  onDelete,
+}: TableRowProps) => {
   return (
     <tr className="border-b border-gray-300">
       {columns.map((column, columnIndex) => (
@@ -52,7 +75,15 @@ export const TableRow = ({ row, columns, rowIndex }: TableRowProps) => {
           {row[column as keyof User]?.toString()}
         </td>
       ))}
-      <td>{/* <button onClick={() => onDelete(row)}>Löschen</button> */}</td>
+      <td>
+        <button
+          onClick={() => {
+            onDelete(row);
+          }}
+        >
+          Löschen
+        </button>
+      </td>
     </tr>
   );
 };
