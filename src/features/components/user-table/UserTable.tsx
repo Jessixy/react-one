@@ -33,6 +33,11 @@ export const UserTable = ({ user }: TableProps) => {
     }
   };
 
+  // U
+  const handleUpdate = (user: User) => {
+    console.log(`Update User with ID ${user.user_id}`);
+  };
+
   return (
     <div className="border border-neutral-400 rounded-md bg-slate-100 px-10 py-5">
       <table className="w-full">
@@ -54,6 +59,7 @@ export const UserTable = ({ user }: TableProps) => {
               columns={columns}
               rowIndex={rowIndex}
               onDelete={handleDelete}
+              onUpdate={handleUpdate}
             />
           ))}
         </tbody>
@@ -67,6 +73,7 @@ export const TableRow = ({
   columns,
   rowIndex,
   onDelete,
+  onUpdate,
 }: TableRowProps) => {
   return (
     <tr className="border-b border-gray-300">
@@ -76,13 +83,22 @@ export const TableRow = ({
         </td>
       ))}
       <td>
-        <button
-          onClick={() => {
-            onDelete(row);
-          }}
-        >
-          Löschen
-        </button>
+        <div className="flex justify-center gap-2">
+          <button
+            onClick={() => {
+              onDelete(row);
+            }}
+          >
+            DELETE
+          </button>
+          <button
+            onClick={() => {
+              onUpdate(row);
+            }}
+          >
+            EDIT
+          </button>
+        </div>
       </td>
     </tr>
   );

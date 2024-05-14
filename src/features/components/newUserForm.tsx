@@ -7,15 +7,37 @@ export type NewUserFormProps = {
 };
 
 const NewUserForm = ({ onSubmit, onClose }: NewUserFormProps) => {
+  const [validationMessage, setValidationMessage] = useState("");
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
     email: "",
-    age: 0,
+    age: 18,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const validateFormData = (): boolean => {
+    const { firstname, lastname, email, age } = formData;
+    const complete =
+      firstname.length > 0 && lastname.length > 0 && email.length > 0;
+    const validAge = age >= 18;
+    const validMail = email.includes("@");
+    if (complete && validAge && validMail) {
+      return true;
+    } else if (!complete) {
+      setValidationMessage("Bitte alle Felder ausfüllen");
+      return false;
+    } else if (!validAge) {
+      setValidationMessage("Mindestalter beträgt 18 Jahre");
+      return false;
+    } else if (!validMail) {
+      setValidationMessage("Bitte geben Sie eine gültige E-Mail Adresse an");
+      return false;
+    }
+    return false;
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -28,8 +50,17 @@ const NewUserForm = ({ onSubmit, onClose }: NewUserFormProps) => {
       email: formData.email,
       role: "USER",
     };
-    onSubmit(newUser);
-    onClose(false);
+    const validForm = validateFormData();
+    if (validForm) {
+      onSubmit(newUser);
+      onClose(false);
+      setFormData({
+        firstname: "",
+        lastname: "",
+        email: "",
+        age: 18,
+      });
+    }
   };
 
   return (
@@ -80,6 +111,9 @@ const NewUserForm = ({ onSubmit, onClose }: NewUserFormProps) => {
           value={formData.age}
           onChange={handleChange}
         />
+      </div>
+      <div>
+        <p className="text-sm text-orange-700">{validationMessage}</p>
       </div>
       <button
         type="submit"

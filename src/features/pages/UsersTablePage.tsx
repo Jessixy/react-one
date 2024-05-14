@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { User } from "../../hooks/http/http-users";
-
 import NewUserForm from "../components/newUserForm";
 import { UserTable } from "../components/user-table/UserTable";
 import ModalOne from "../../teststation/components/modal/ModalOne";

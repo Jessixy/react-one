@@ -17,6 +17,7 @@ export type TableRowProps = {
   columns: string[];
   rowIndex: number;
   onDelete: (row: User) => void;
+  onUpdate: (row: User) => void;
 };
 
 export type TableColumnProps = {
