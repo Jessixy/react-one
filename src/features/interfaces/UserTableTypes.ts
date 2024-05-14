@@ -8,10 +8,6 @@ export type TableData = {
 //   data: User[];
 // };
 
-export type TableProps = {
-  user: User | null;
-};
-
 export type TableRowProps = {
   row: User;
   columns: string[];

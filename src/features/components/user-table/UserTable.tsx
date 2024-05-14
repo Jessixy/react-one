@@ -1,13 +1,15 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   User,
   useAddUser,
   useDeleteUser,
   useUsers,
 } from "../../../hooks/http/http-users";
-import { TableProps, TableRowProps } from "../../interfaces/UserTableTypes";
+import { TableRowProps } from "../../interfaces/UserTableTypes";
+import { TableProps } from "../../pages/UsersTablePage";
 
-export const UserTable = ({ user }: TableProps) => {
+export const UserTable = ({ user, updateUser }: TableProps) => {
+  //const [updateUser, setUpdateUser] = useState<User | null>(null);
   const data = useUsers();
   const { deleteUser } = useDeleteUser();
   const { addUser } = useAddUser();
@@ -33,9 +35,10 @@ export const UserTable = ({ user }: TableProps) => {
     }
   };
 
-  // U
+  // Update User
   const handleUpdate = (user: User) => {
     console.log(`Update User with ID ${user.user_id}`);
+    updateUser(user);
   };
 
   return (
@@ -58,8 +61,8 @@ export const UserTable = ({ user }: TableProps) => {
               row={row}
               columns={columns}
               rowIndex={rowIndex}
-              onDelete={() => handleDelete(row)}
-              onUpdate={() => handleUpdate(row)}
+              onDelete={(row) => handleDelete(row)}
+              onUpdate={(row) => handleUpdate(row)}
             />
           ))}
         </tbody>

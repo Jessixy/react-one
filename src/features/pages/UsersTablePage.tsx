@@ -4,9 +4,22 @@ import NewUserForm from "../components/newUserForm";
 import { UserTable } from "../components/user-table/UserTable";
 import ModalOne from "../../teststation/components/modal/ModalOne";
 
+export type TableProps = {
+  user: User | null;
+  updateUser: (user: User) => void;
+};
+
 const UsersTablePage = () => {
   const [user, setUser] = useState<User | null>(null);
   const [isOpen, setIsOpen] = useState(false);
+
+  const editUser = (user: User) => {
+    console.log(user);
+  };
+
+  // const updateUser = (user: User) => {
+  //   setUser(user);
+  // };
 
   return (
     <div className="w-full">
@@ -19,7 +32,7 @@ const UsersTablePage = () => {
         </button>
       </div>
       <div></div>
-      <UserTable user={user} />
+      <UserTable user={user} updateUser={(user) => editUser(user)} />
       <ModalOne open={isOpen} onClose={() => setIsOpen(false)}>
         <div className="mt-2 px-2">
           <NewUserForm
