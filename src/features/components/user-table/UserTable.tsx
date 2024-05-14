@@ -58,8 +58,8 @@ export const UserTable = ({ user }: TableProps) => {
               row={row}
               columns={columns}
               rowIndex={rowIndex}
-              onDelete={handleDelete}
-              onUpdate={handleUpdate}
+              onDelete={() => handleDelete(row)}
+              onUpdate={() => handleUpdate(row)}
             />
           ))}
         </tbody>
