@@ -1,19 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { User } from "../../hooks/http/http-users";
 
 export type NewUserFormProps = {
   onSubmit: (user: User) => void;
   onClose: (isOpen: boolean) => void;
+  updateUser: User | null;
 };
 
-const NewUserForm = ({ onSubmit, onClose }: NewUserFormProps) => {
-  const [validationMessage, setValidationMessage] = useState("");
-  const [formData, setFormData] = useState({
+const NewUserForm = ({ onSubmit, onClose, updateUser }: NewUserFormProps) => {
+  const emptyFormData = {
     firstname: "",
     lastname: "",
     email: "",
     age: 18,
-  });
+  };
+
+  const [validationMessage, setValidationMessage] = useState("");
+  const [formData, setFormData] = useState(emptyFormData);
+
+  useEffect(() => {
+    if (updateUser) {
+      setFormData(updateUser);
+    }
+  }, [updateUser]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -54,12 +63,7 @@ const NewUserForm = ({ onSubmit, onClose }: NewUserFormProps) => {
     if (validForm) {
       onSubmit(newUser);
       onClose(false);
-      setFormData({
-        firstname: "",
-        lastname: "",
-        email: "",
-        age: 18,
-      });
+      setFormData(emptyFormData);
     }
   };
 

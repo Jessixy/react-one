@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { User } from "../../hooks/http/http-users";
 import NewUserForm from "../components/newUserForm";
 import { UserTable } from "../components/user-table/UserTable";
@@ -13,13 +13,11 @@ const UsersTablePage = () => {
   const [user, setUser] = useState<User | null>(null);
   const [isOpen, setIsOpen] = useState(false);
 
-  const editUser = (user: User) => {
+  const editUser = (user: User | null) => {
     console.log(user);
+    setUser(user);
+    setIsOpen(true);
   };
-
-  // const updateUser = (user: User) => {
-  //   setUser(user);
-  // };
 
   return (
     <div className="w-full">
@@ -38,6 +36,7 @@ const UsersTablePage = () => {
           <NewUserForm
             onSubmit={(user: User) => setUser(user)}
             onClose={(isOpen: boolean) => setIsOpen(isOpen)}
+            updateUser={user}
           />
         </div>
       </ModalOne>

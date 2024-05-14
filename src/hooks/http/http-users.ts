@@ -38,6 +38,8 @@ export const useUsers = (): User[] => {
   return users;
 };
 
+// UPDATE User
+
 // ADD User
 export const useAddUser = () => {
   const [users, setUsers] = useState<User[]>([]);
