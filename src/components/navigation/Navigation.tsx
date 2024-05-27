@@ -15,8 +15,8 @@ import Miscellaneous from "../pages/Miscellaneous";
 import TestComponents from "../pages/TestComponents";
 import { TestBE } from "../pages/TestBE";
 import { FeaturesLayout } from "./layouts/FeaturesLayout";
-import UsersTablePage from "../../features/pages/UsersTablePage";
 import { UserCardsPage } from "../../features/pages/UserCardsPage";
+import UsersTablePage from "../../features/user-table-page/UserTablePage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

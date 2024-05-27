@@ -1,44 +1,32 @@
-import { useEffect, useMemo } from "react";
-import {
-  User,
-  useAddUser,
-  useDeleteUser,
-  useUsers,
-} from "../../../hooks/http/http-users";
-import { TableRowProps } from "../../interfaces/UserTableTypes";
-import { TableProps } from "../../pages/UsersTablePage";
+import { useMemo } from "react";
+import { User } from "../../hooks/http/http-users";
+import { TableRowProps } from "../interfaces/UserTableTypes";
 
-export const UserTable = ({ user, updateUser }: TableProps) => {
-  //const [updateUser, setUpdateUser] = useState<User | null>(null);
-  const data = useUsers();
-  const { deleteUser } = useDeleteUser();
-  const { addUser } = useAddUser();
+export type UserTableProps = {
+  users: User[];
+  onDeleteUser: (user: User) => void;
+  onUpdateUser: (user: User) => void;
+};
 
-  // don't render the id
+export const UserTable = ({
+  users,
+  onDeleteUser,
+  onUpdateUser,
+}: UserTableProps) => {
   const columns = useMemo(() => {
-    return Object.keys(data[0] || {}).filter((key) => key !== "user_id");
-  }, [data]);
+    return Object.keys(users[0] || {}).filter((key) => key !== "user_id");
+  }, [users]);
 
-  // Add
-  useEffect(() => {
-    if (user) {
-      console.log(user);
-      addUser(user);
-    }
-  }, [user]);
-
-  // Delete User
   const handleDelete = (user: User) => {
-    console.log(`Lösche Benutzer mit ID ${user.user_id}`);
-    if (user.user_id) {
-      deleteUser(user.user_id);
+    if (user) {
+      onDeleteUser(user);
     }
   };
 
-  // Update User
   const handleUpdate = (user: User) => {
-    console.log(`Update User with ID ${user.user_id}`);
-    updateUser(user);
+    if (user) {
+      onUpdateUser(user);
+    }
   };
 
   return (
@@ -55,14 +43,18 @@ export const UserTable = ({ user, updateUser }: TableProps) => {
         </thead>
 
         <tbody>
-          {data.map((row, rowIndex) => (
+          {users.map((row, rowIndex) => (
             <TableRow
               key={rowIndex}
               row={row}
               columns={columns}
               rowIndex={rowIndex}
-              onDelete={(row) => handleDelete(row)}
-              onUpdate={(row) => handleUpdate(row)}
+              onDelete={(row) => {
+                handleDelete(row);
+              }}
+              onUpdate={(row) => {
+                handleUpdate(row);
+              }}
             />
           ))}
         </tbody>

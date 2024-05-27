@@ -9,7 +9,7 @@ export type User = {
   role: string;
 };
 
-export const useUsers = () => {
+export const useUsers = (): User[] => {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -33,10 +33,12 @@ export const useUsers = () => {
 
   useEffect(() => {
     fetchUsers();
-  }, [users]);
+  }, []);
 
-  return { users, fetchUsers };
+  return users;
 };
+
+// UPDATE User
 
 // ADD User
 export const useAddUser = () => {
@@ -89,31 +91,4 @@ export const useDeleteUser = () => {
   };
 
   return { deleteUser, Error };
-};
-
-// Update User
-export const useUpdateUser = () => {
-  const [users, setUsers] = useState<User[]>([]);
-  const updateUser = async (user: User) => {
-    console.log("UserId", user.user_id);
-    try {
-      const response = await fetch(
-        `http://localhost:3000/users/${user.user_id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(user),
-        }
-      );
-      const data = await response.json();
-      console.log(data);
-      if (!response.ok) {
-        throw new Error("Failed to update user");
-      }
-    } catch (error) {}
-  };
-
-  return { updateUser, Error };
 };

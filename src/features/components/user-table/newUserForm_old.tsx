@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { User } from "../../hooks/http/http-users";
+import { User } from "../../../hooks/http/http-users";
 
 export type NewUserFormProps = {
   onSubmit: (user: User) => void;
