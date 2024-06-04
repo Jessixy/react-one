@@ -6,38 +6,37 @@ import {
 } from "react-router-dom";
 import Home from "../pages/Home";
 import RootLayout from "./layouts/RootLayout";
-import Faq from "../pages/help/Faq";
-import NotFound from "../pages/help/NotFound";
-import DisplayAccordion from "../pages/DisplayAccordion";
-import DisplayModalOne from "../pages/DisplayModalOne";
-import DisplayPortal from "../pages/DisplayPortal";
-import Miscellaneous from "../pages/Miscellaneous";
-import TestComponents from "../pages/TestComponents";
-import { TestBE } from "../pages/TestBE";
+import Miscellaneous from "../../teststation/views/Miscellaneous";
+import UsersTablePage from "../../features/views/UserTablePage";
+import { TeststationLayout } from "./layouts/TeststationLayout";
 import { FeaturesLayout } from "./layouts/FeaturesLayout";
-import { UserCardsPage } from "../../features/pages/UserCardsPage";
-import UsersTablePage from "../../features/user-table-page/UserTablePage";
+import TutorialDummy from "../../tutorials/views/TutorialDummy";
+import TutorialsLayout from "./layouts/TutorialsLayout";
+import DisplayAccordion from "../../teststation/views/DisplayAccordion";
+import DisplayPortal from "../../teststation/views/DisplayPortal";
+import DisplayModalOne from "../../teststation/views/DisplayModalOne";
+import TestView from "../../teststation/views/TestView";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} />
-      <Route path="test" element={<TestComponents />} />
-      <Route path="test-be" element={<TestBE />} />
-      <Route path="accordion" element={<DisplayAccordion />} />
-      <Route path="modalone" element={<DisplayModalOne />} />
-      <Route path="portal" element={<DisplayPortal />} />
-      <Route path="various" element={<Miscellaneous />} />
-      {/* <Route path="help" element={<HelpLayout />}>
-        <Route path="faq" element={<Faq />} />
-        <Route path="contact" element={<Contact />} />
-      </Route> */}
-      <Route path="features" element={<FeaturesLayout />}>
-        <Route path="faq" element={<Faq />} />
-        <Route path="usertable" element={<UsersTablePage />} />
-        <Route path="usercards" element={<UserCardsPage />} />
+      {/* SubRoutes */}
+      <Route path="tutorials" element={<TutorialsLayout />}>
+        <Route path="dummyview" element={<TutorialDummy />} />
       </Route>
-      <Route path="*" element={<NotFound />} />
+      <Route path="teststation" element={<TeststationLayout />}>
+        <Route path="testview" element={<TestView />} />
+        <Route path="accordion" element={<DisplayAccordion />} />
+        <Route path="modal-one" element={<DisplayModalOne />} />
+        <Route path="portal" element={<DisplayPortal />} />
+        <Route path="miscellaneous" element={<Miscellaneous />} />
+      </Route>
+      <Route path="features" element={<FeaturesLayout />}>
+        <Route path="usertable" element={<UsersTablePage />} />
+      </Route>
+      {/* Default Page */}
+      <Route path="*" element={<Home />} />
     </Route>
   )
 );

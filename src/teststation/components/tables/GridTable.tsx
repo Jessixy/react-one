@@ -1,5 +1,8 @@
 import { User } from "../../../hooks/http/http-users";
-import { TableProps } from "../../../types_and_interfaces/TableTypes";
+
+interface TableProps {
+  data: User[];
+}
 
 export const GridTable = ({ data }: TableProps) => {
   const columns = Object.keys(data[0] || {}).filter((key) => key !== "user_id");
