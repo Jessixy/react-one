@@ -5,7 +5,8 @@ const TutorialsLayout = () => {
     <div>
       <nav className="flex flex-row p-3 gap-4 flex-grow w-full">
         <div className="flex flex-row p-3 gap-4 w-full">
-          <NavLink to="dummyview">Dummy View</NavLink>
+          <NavLink to="fetchdata-1">HTTP Handling 1</NavLink>
+          <NavLink to="reactquery">React Query</NavLink>
         </div>
       </nav>
       <Outlet />

@@ -1,8 +1,11 @@
 import { User, useUsers } from "../../hooks/http/http-users";
 import UserCard from "../components/user-cards/UserCard";
 
+export type CardProps = {
+  user: User;
+};
 export const UserCardsPage = () => {
-  const users = useUsers();
+  const { users } = useUsers();
 
   return (
     <div
