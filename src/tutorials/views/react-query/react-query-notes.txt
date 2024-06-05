@@ -1,0 +1,31 @@
+ReactQuery: https://tanstack.com/query/latest/docs/framework/react/quick-start
+
+
+main.tsx
+- import { QueryClientProvider, QueryClient} from "@tanstack/react-query";
+- create Instance of QueryClientProvider
+- wrap app.tsx with the QueryClientProvider
+
+-----------------------
+
+import { QueryClientProvider, QueryClient} from "@tanstack/react-query";
+
+const queryClient = new QueryClient()
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
+  </React.StrictMode>
+);
+
+-----------------------
+
+
+ReactQueryOne.tsx (Demo Component)
+- import { useQuery } from "@tanstack/react-query";
+
+
+
+

@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { User } from "../../hooks/http/http-users";
-import { DiVim } from "react-icons/di";
 
 /**
  * youtube: https://www.youtube.com/watch?v=00lxm_doFYw&t=125s

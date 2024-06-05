@@ -17,7 +17,7 @@ import DisplayModalOne from "../../teststation/views/DisplayModalOne";
 import TestView from "../../teststation/views/TestView";
 import { UserCardsPage } from "../../features/views/UserCardsPage";
 import { FetchDataTutorialOne } from "../../tutorials/views/FetchDataTutorialOne";
-import ReactQueryOne from "../../tutorials/views/ReactQueryOne";
+import ReactQueryOne from "../../tutorials/views/react-query/ReactQueryOne";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
